@@ -1,0 +1,15 @@
+# Start running playbook
+
+- name: test my new module
+  connection: local
+  hosts: localhost
+  tasks:
+    - name: run the new module
+      my_new_test_module:
+        name: 'hello'
+        new: true
+      register: testout
+
+    - name: dump test output
+      debug:
+        msg: '{{ testout }}'
