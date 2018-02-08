@@ -1,15 +1,14 @@
 # Start running playbook
 
-- name: test my new module
+- name: test tc_fail_mode_module
   connection: local
   hosts: localhost
   tasks:
-    - name: run the new module
-      my_new_test_module:
-        name: 'hello'
-        new: true
-      register: testout
-
-    - name: dump test output
-      debug:
-        msg: '{{ testout }}'
+    - name: run the tc fail mode module
+      tc_fail_mode_module:
+        interface: enp0s3
+        withheld_period: 5
+      become: true
+      become_method: sudo
+      async: 10
+      poll: 0
